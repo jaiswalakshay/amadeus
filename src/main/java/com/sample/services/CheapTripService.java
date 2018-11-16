@@ -10,7 +10,9 @@ import org.springframework.web.client.RestTemplate;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CheapTripService {
@@ -30,7 +32,7 @@ public class CheapTripService {
     }
 
 
-    public JsonNode getTrips( String originCity,
+    public List<JsonNode> getTrips( String originCity,
                               String destCity,
                               Date startDate,
                               Integer noOfDays,
@@ -45,7 +47,11 @@ public class CheapTripService {
             return null;
         }
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
-            return responseEntity.getBody();
+            List<JsonNode> resultFor3Trips = new ArrayList<>();
+            for(int i=0;i<3;i++){
+                resultFor3Trips.add(responseEntity.getBody().get("results").get(i));
+            }
+            return resultFor3Trips;
         } else {
             return null;
         }

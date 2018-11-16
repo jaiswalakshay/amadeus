@@ -31,12 +31,12 @@ public class CheapTripController {
     private CheapTripService cheapTripService;
 
     @RequestMapping(value = "/searchCheapTrips", method = RequestMethod.GET)
-    public ResponseEntity<JsonNode> foodsearch(@RequestParam String originCity,
+    public ResponseEntity<List<JsonNode>> foodsearch(@RequestParam String originCity,
                                                @RequestParam String destCity,
                                                @RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd")Date startDate,
                                                @RequestParam Integer noOfDays,
                                                @RequestParam String comfortOpts) {
-        JsonNode result= cheapTripService.getTrips(originCity,destCity,startDate,noOfDays,comfortOpts);
+        List<JsonNode> result= cheapTripService.getTrips(originCity,destCity,startDate,noOfDays,comfortOpts);
         if(result!=null){
             return new ResponseEntity<>(result,HttpStatus.OK);
         }
