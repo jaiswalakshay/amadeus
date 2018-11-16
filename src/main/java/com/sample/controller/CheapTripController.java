@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.sample.services.CheapTripService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class CheapTripController {
     @RequestMapping(value = "/searchCheapTrips", method = RequestMethod.GET)
     public ResponseEntity<JsonNode> foodsearch(@RequestParam String originCity,
                                                @RequestParam String destCity,
-                                               @RequestParam Date startDate,
+                                               @RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd")Date startDate,
                                                @RequestParam Integer noOfDays,
                                                @RequestParam String comfortOpts) {
         JsonNode result= cheapTripService.getTrips(originCity,destCity,startDate,noOfDays,comfortOpts);
