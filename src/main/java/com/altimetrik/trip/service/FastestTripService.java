@@ -7,15 +7,11 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.altimetrik.trip.client.FetchFlightInfo;
-import com.altimetrik.trip.client.FetchMapInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.altimetrik.trip.models.Trip;
-import com.altimetrik.trip.models.DistanceRows;
-import com.altimetrik.trip.models.GeoLocation;
 import com.altimetrik.trip.models.Itineraries;
-import com.altimetrik.trip.models.Location;
 import com.altimetrik.trip.models.Output;
 import com.altimetrik.trip.models.Results;
 
@@ -23,9 +19,6 @@ import com.altimetrik.trip.models.Results;
 public class FastestTripService {
     @Autowired
     FetchFlightInfo fetchFlightInfo;
-
-    @Autowired
-    FetchMapInfo fetchMapInfo;
 
     public Trip getFastestTrip(String origin, String destination, String departureDate, String returnDate) {
         Results result = getFastestFlight(origin, destination, departureDate, returnDate);
@@ -63,10 +56,5 @@ public class FastestTripService {
 
         re.setItineraries(re.getItineraries().subList(0, 1));
         return re;
-    }
-
-    private DistanceRows getDistanceInfo(String origin, List<Location> destination) {
-        GeoLocation airportlocation = fetchMapInfo.getlatlongDetails(origin);
-        return fetchMapInfo.getDistanceMatrix(airportlocation, destination);
     }
 }
