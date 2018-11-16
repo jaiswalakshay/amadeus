@@ -13,12 +13,12 @@ public class FetchFlightInfo {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    private String getLowerPriceFlightUri() {
+    private String getURI() {
         return "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=" + apikey;
     }
 
-    public Output getLowerFlightDetails(String origin, String destination, String departureDate, String returnDate) {
-        String URI = this.getLowerPriceFlightUri() + "&origin=" + origin + "&destination=" + destination
+    public Output getFlightInfo(String origin, String destination, String departureDate, String returnDate) {
+        String URI = this.getURI() + "&origin=" + origin + "&destination=" + destination
                 + "&departure_date=" + departureDate + "&return_date=" + returnDate;
         //System.out.println("/nURI " +URI);
         ResponseEntity<Output> output = restTemplate.getForEntity(URI, Output.class);

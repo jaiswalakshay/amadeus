@@ -14,13 +14,14 @@ public class FetchCarInfo {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    private String getLowestPriceFlightUri() {
+    private String getURI() {
         return "https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=" + apikey;
     }
 
-    public CarResults getLowerFlightDetails(String location, String pick_up, String drop_off) {
-        String URI = this.getLowestPriceFlightUri() + "&location=" + location + "&pick_up=" + pick_up
+    public CarResults getCarDetails(String location, String pick_up, String drop_off) {
+        String URI = this.getURI() + "&location=" + location + "&pick_up=" + pick_up
                 + "&drop_off=" + drop_off;
+
         //System.out.println("/nURI " +URI);
         ResponseEntity<CarResults> output = restTemplate.getForEntity(URI, CarResults.class);
 

@@ -40,8 +40,6 @@ public class FetchMapInfo {
         }
         url.deleteCharAt(url.length() - 1);
         String u1 = url.toString();
-        //System.out.println("distancematrix: "+u1);
-        //String url = distanceApi+ "&origins="+point1.getLatitude()+","+point1.getLongitude()+"&destinations="+point2.getLatitude()+","+point2.getLongitude();
         ResponseEntity<DistanceResults> output = restTemplate.getForEntity(u1, DistanceResults.class);
 
         return output.getBody().getDistanceRows().get(0);
