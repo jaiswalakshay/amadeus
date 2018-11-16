@@ -14,8 +14,10 @@ public class CheapestTripService {
     public Trip getCheapestFlight(String origin, String destination, String departureDate, String returnDate) {
         Output results = fetchFlightInfo.getFlightInfo(origin, destination, departureDate, returnDate);
         Results result = results.getResults().get(0);
-        result.setItineraries(result.getItineraries().subList(0, 3));
-
+        if(result.getItineraries().size() > 3)
+            result.setItineraries(result.getItineraries().subList(0, 3));
+        else
+            result.setItineraries(result.getItineraries());
         Trip trip = new Trip();
         trip.setHotels(null);
         trip.setResult(result);
